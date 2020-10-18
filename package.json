@@ -1,8 +1,8 @@
 {
-  "name": "ts_temp",
+  "name": "electron_timer",
   "version": "1.0.0",
   "private": true,
-  "description": "ts_tempdesu",
+  "description": "electron_timerdesu",
   "main": "./dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
