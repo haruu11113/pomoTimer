@@ -1,0 +1,11 @@
+lib
+.cache
+*.map
+coverage
+__pycache__
+.pyc
+.log
+build
+node_modules
+publish.sh
+package-lock.json
