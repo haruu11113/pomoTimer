@@ -1,12 +1,12 @@
-import { ipcRenderer } from 'electron';
+// All of the Node.js APIs are available in the preload process.
+// It has the same sandbox as a Chrome extension.
+window.addEventListener('DOMContentLoaded', () => {
+  const replaceText = (selector, text) => {
+    const element = document.getElementById(selector)
+    if (element) element.innerText = text
+  }
 
-/**
- * nodeIntegration: false (= ほぼ Web と同じ ) であるため、
- * 本来ならレンダラープロセスで Electron の機能は使えない。
- * /
-
- /**
- * Window オブジェクトに ipcRenderer メソッドを追加し、
- * レンダラープロセスからも利用できるようにする。
- */
-window.ipcRenderer = ipcRenderer;
+  for (const type of ['chrome', 'node', 'electron']) {
+    replaceText(`${type}-version`, process.versions[type])
+  }
+})

@@ -1,66 +1,43 @@
-import { app, BrowserWindow, ipcMain} from 'electron';
-import loadDevtool from 'electron-load-devtool';
+// Modules to control application life and create native browser window
+const {app, BrowserWindow} = require('electron')
+const path = require('path')
 
-import path from 'path';
-
-/**
- * Preload スクリプトの所在するディレクトリを取得
- *
- * 開発時には webpack の出力先を指定し、
- * electron-builder によるパッケージ後には 'asarUnpack' オプションに
- * 設定したディレクトリを返す
- */
-const getResourceDirectory = () => {
-  return process.env.NODE_ENV === 'development'
-    ? path.join(process.cwd(), 'dist')
-    : path.join(process.resourcesPath, 'app.asar.unpack', 'dist');
-};
-
-/**
- * BrowserWindowインスタンスを作成する関数
- */
-const createWindow = () => {
+function createWindow () {
+  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      /**
-       * BrowserWindowインスタンス（レンダラープロセス）では
-       * Node.jsの機能を無効化する（デフォルト）
-       */
-      nodeIntegration: false,
-        contextIsolation: false,
-      /**
-       * Preloadスクリプトは絶対パスで指定する
-       */
-      preload: path.resolve(getResourceDirectory(), 'preload.js'),
-    },
-  });
-  ipcMain.on('async-message', (e, arg) => {
-    // 受信 ping!
-    console.log(arg);
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
 
-    // 返信 pong!
-    e.reply('async-reply', 'pong!');
-  });
-  // レンダラープロセスをロード
-  mainWindow.loadFile('dist/index.html');
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
 
-  // 開発時にはデベロッパーツールを開く
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+}
 
-    // React Developer Tools をロードする
-    loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
-  }
-};
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  createWindow()
+  
+  app.on('activate', function () {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 
-/**
- * アプリが起動したら BrowserWindow インスタンスを作成し、
- * レンダラープロセス（index.htmlとそこから呼ばれるスクリプト）を
- * ロードする
- */
-app.whenReady().then(createWindow);
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit()
+})
 
-// すべてのウィンドウが閉じられたらアプリを終了する
-app.once('window-all-closed', () => app.quit());
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
