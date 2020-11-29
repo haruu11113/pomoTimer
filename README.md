@@ -1,4 +1,4 @@
-# NAME
+# pomoTimer
 
 ## Installing
 
@@ -9,7 +9,9 @@
 ## Contribution
 
 ## template
-https://github.com/electron/electron-quick-start-typescript/blob/master/package.json
+We user electron template for typescript  
+-> https://github.com/electron/electron-quick-start-typescript/blob/master/package.json
+
 ## License
 [MIT License](./.github/LICENSE)
 
