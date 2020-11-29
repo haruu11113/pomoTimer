@@ -7,7 +7,7 @@
         "electron": "electron .",
         "tsc": "tsc",
         "build": "webpack",
-        "start": "tsc && webpack",
+        "start": "tsc && webpack && electron .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
