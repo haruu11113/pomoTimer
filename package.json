@@ -2,12 +2,12 @@
     "name": "timer",
     "version": "1.0.0",
     "description": "## Installing",
-    "main": "main.js",
     "scripts": {
-        "electron": "electron .",
+        "electron": "electron ./dist/main.js",
         "tsc": "tsc",
         "build": "webpack",
-        "start": "tsc && webpack && electron .",
+        "start": "tsc && webpack && electron ./dist/main.js",
+        "lint": "eslint -c .eslintrc --ext .ts ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -27,7 +27,10 @@
         "webpack-cli": "^4.2.0"
     },
     "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.8.2",
+        "@typescript-eslint/parser": "^4.8.2",
         "electron": "^11.0.3",
+        "eslint": "^7.14.0",
         "express": "^4.17.1",
         "push.js": "^1.0.12"
     }
