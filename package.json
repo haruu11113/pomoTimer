@@ -3,10 +3,10 @@
     "version": "1.0.0",
     "description": "## Installing",
     "scripts": {
-        "electron": "electron ./dist/main.js",
+        "electron": "electron ./dist/index.js",
         "tsc": "tsc",
         "build": "webpack",
-        "start": "tsc && webpack && electron ./dist/main.js",
+        "start": "tsc && webpack && electron ./dist/index.js",
         "lint": "eslint -c .eslintrc --ext .ts ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

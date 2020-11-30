@@ -7,11 +7,11 @@ module.exports = {
 
     // メインとなるJavaScriptファイル（エントリーポイント）
     // entry: './src/index.ts',
-    entry: './dist/index.js',
+    entry: './dist/main.js',
 
     output: {
         path: path.join(__dirname, "dist"),
-        filename: "index.js"
+        filename: "main.js"
     },
 
     module: {
