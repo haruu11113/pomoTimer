@@ -24,6 +24,9 @@ export class Timer {
     }
 
     startWork(): void {
+        let pieElem: HTMLInputElement = <HTMLInputElement>document.getElementById('pie');
+        pieElem.className = "pie";
+ 
         this.timerInterval = setInterval(() => {
             let timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
             let timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
@@ -107,5 +110,4 @@ export class Timer {
         });
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     }
-
 }
