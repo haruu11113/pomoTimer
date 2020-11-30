@@ -2,6 +2,10 @@
 /*     border: 1px solid black; */
 /* } */
 
+body {
+    background-color: rgb(26, 20, 51);
+    color: white;
+}
 .pie{
     position: relative;
     width: 300px;
