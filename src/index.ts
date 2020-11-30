@@ -1,7 +1,7 @@
 // import UUID from "uuid";
-import { State } from "./State";
+import { mainState } from "./mainState";
 
-const state: State = new State();
+const state: mainState = new mainState();
 
 var startbutton: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
 startbutton.addEventListener('click', () => {

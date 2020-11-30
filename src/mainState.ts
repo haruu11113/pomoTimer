@@ -8,7 +8,7 @@ export enum stateList {
     BREAKED
 }
 
-export class State {
+export class mainState {
     public state: number;
     public timer: Timer;
     constructor () {
