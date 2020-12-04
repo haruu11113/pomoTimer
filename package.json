@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/haruu11113/electron_timer#readme",
     "devDependencies": {
+        "electron-packager": "^15.1.0",
         "ts-loader": "^8.0.11",
         "typescript": "^4.1.2",
         "webpack": "^5.8.0",
