@@ -6,6 +6,8 @@
         "build": "tsc && webpack",
         "start": "tsc && webpack && electron ./dist/main.js",
         "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
+        "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
+        "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
         "lint": "eslint -c .eslintrc --ext .ts ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
