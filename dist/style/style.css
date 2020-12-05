@@ -24,7 +24,7 @@ body {
     border-radius: 0 100% 100% 0 / 50%;
     background-color: #28344e;
     transform-origin: left;
-    animation: spin 10s linear infinite,color 20s step-end infinite;
+    animation: spin 750s linear infinite,color 1500s step-end infinite;
 }
  
 @keyframes spin {
