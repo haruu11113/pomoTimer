@@ -10,7 +10,7 @@ jobs:
                 name: npmの更新
                 command: 'sudo npm install -g npm@6.14.7'
             - restore_cache:
-                key: dependency-cache-{{ checksum "package-lock.json" }}
+                key: node-cache-{{ checksum "package-lock.json" }}
             - run:
                 name: npm のインストール
                 command: npm install
