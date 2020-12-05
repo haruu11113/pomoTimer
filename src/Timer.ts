@@ -17,19 +17,19 @@ export class Timer {
     }
 
     updateFinishAt(minute: number): void{
-        let now: Date = new Date();
+        const now: Date = new Date();
         this.finishAt.setMinutes(now.getMinutes() + minute);
         this.minute = minute;
         this.second = 0;
     }
 
     startWork(): void {
-        let pieElem: HTMLInputElement = <HTMLInputElement>document.getElementById('pie');
+        const pieElem: HTMLInputElement = <HTMLInputElement>document.getElementById('pie');
         pieElem.className = "pie";
  
         this.timerInterval = setInterval(() => {
-            let timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
-            let timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
+            const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
+            const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
 
             if (this.minute == 0 && this.second==0 ){
                 this.stopTimer();
@@ -57,8 +57,8 @@ export class Timer {
 
     startBreak(): void {
         this.timerInterval = setInterval(() => {
-            let timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
-            let timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
+            const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
+            const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
 
             if (this.minute == 0 && this.second==0 ){
                 this.stopTimer();
@@ -84,16 +84,16 @@ export class Timer {
 
     setTimer(minute: number, stateName: string): void {
         console.log('settimer');
-        let startButtonElem: HTMLElement = <HTMLElement>document.getElementById('startButton');
+        const startButtonElem: HTMLElement = <HTMLElement>document.getElementById('startButton');
         startButtonElem.innerText = stateName;
 
         this.updateFinishAt(minute);
 
-        let timerElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timer');
+        const  timerElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timer');
         timerElem.innerText = String(this.finishAt.getHours()) + ' : ' + String(this.finishAt.getMinutes()) + ' : ' + String(this.finishAt.getSeconds());
 
-        let timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
-        let timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
+        const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
+        const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
         timerMinuteElem.innerText = String(this.minute);
         timerSecondElem.innerText = ' : ' + String(this.second);
     }
