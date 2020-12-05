@@ -1,12 +1,13 @@
 {
-    "name": "timer",
+    "name": "pomoTimer",
     "version": "1.0.0",
-    "description": "## Installing",
+    "description": "This is a pomodoro timer",
     "scripts": {
-        "electron": "electron ./dist/index.js",
-        "tsc": "tsc",
-        "build": "webpack",
-        "start": "tsc && webpack && electron ./dist/index.js",
+        "build": "tsc && webpack",
+        "start": "tsc && webpack && electron ./dist/main.js",
+        "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
+        "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
+        "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
         "lint": "eslint -c .eslintrc --ext .ts ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -14,14 +15,52 @@
         "type": "git",
         "url": "git+https://github.com/haruu11113/electron_timer.git"
     },
-    "author": "",
+    "author": "haruu11113",
     "license": "ISC",
+    "build": {
+        "productName": "pomoTimer",
+        "extends": null,
+        "extraMetadata": {
+            "main": "dist/main.js"
+        },
+        "appId": "com.electron.pomoTimer",
+        "dmg": {
+            "contents": [
+                {
+                    "x": 410,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 130,
+                    "y": 150,
+                    "type": "file"
+                }
+            ]
+        },
+        "directories": {
+            "output": "release"
+        },
+        "files": [
+            "dist",
+            "node_modules/",
+            "package.json"
+        ],
+        "mac": {
+            "icon": "icons/icon_mac.png"
+        },
+        "win": {
+            "icon": "icons/icon_win.ico"
+        }
+    },
     "bugs": {
         "url": "https://github.com/haruu11113/electron_timer/issues"
     },
     "homepage": "https://github.com/haruu11113/electron_timer#readme",
     "devDependencies": {
-        "electron-packager": "^15.1.0",
+        "electron-builder": "^22.9.1",
+        "electron": "^11.0.3",
         "ts-loader": "^8.0.11",
         "typescript": "^4.1.2",
         "webpack": "^5.8.0",
@@ -30,7 +69,6 @@
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^4.8.2",
         "@typescript-eslint/parser": "^4.8.2",
-        "electron": "^11.0.3",
         "eslint": "^7.14.0",
         "express": "^4.17.1",
         "push.js": "^1.0.12"
