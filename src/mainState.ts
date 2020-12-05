@@ -8,7 +8,7 @@ export enum stateList {
     BREAKED
 }
 
-export class State {
+export class mainState {
     public state: number;
     public timer: Timer;
     constructor () {
@@ -34,24 +34,24 @@ export class State {
     private updateView(): void {
         this.timer.stopTimer();
         if (this.state == stateList.INIT){
-            let minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
+            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
             this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
         } else if (this.state == stateList.WORKING) {
-            let minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
+            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
             this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
             this.timer.startWork();
 
         } else if (this.state == stateList.WORKED) { 
-            let minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
+            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
             this.timer.setTimer(parseInt(minuteFormElem.value), 'start break');
 
         } else if (this.state == stateList.BREAKING) {
-            let minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
+            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
             this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
             this.timer.startBreak();
 
         } else if (this.state == stateList.BREAKED) {
-            let minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
+            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
             this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
 
         } else {
