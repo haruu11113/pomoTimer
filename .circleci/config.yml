@@ -8,7 +8,7 @@ jobs:
             - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
             - run:
                 name: npmの更新
-                command: 'npm install -g npm@6.14.7'
+                command: 'sudo npm install -g npm@6.14.7'
             - restore_cache:
                 key: dependency-cache-{{ checksum "package-lock.json" }}
             - run:
