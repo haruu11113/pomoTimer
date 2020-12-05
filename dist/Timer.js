@@ -23,6 +23,8 @@ var Timer = /** @class */ (function () {
     };
     Timer.prototype.startWork = function () {
         var _this = this;
+        var pieElem = document.getElementById('pie');
+        pieElem.className = "pie";
         this.timerInterval = setInterval(function () {
             var timerMinuteElem = document.getElementById('timerMinute');
             var timerSecondElem = document.getElementById('timerSecond');
