@@ -9,23 +9,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./dist/State.js":
-/*!***********************!*\
-  !*** ./dist/State.js ***!
-  \***********************/
-/*! flagged exports */
-/*! export State [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export __esModule [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export stateList [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__ */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.State = exports.stateList = void 0;\nvar Timer_1 = __webpack_require__(/*! ./Timer */ \"./dist/Timer.js\");\nvar stateList;\n(function (stateList) {\n    stateList[stateList[\"INIT\"] = 0] = \"INIT\";\n    stateList[stateList[\"WORKING\"] = 1] = \"WORKING\";\n    stateList[stateList[\"WORKED\"] = 2] = \"WORKED\";\n    stateList[stateList[\"BREAKING\"] = 3] = \"BREAKING\";\n    stateList[stateList[\"BREAKED\"] = 4] = \"BREAKED\";\n})(stateList = exports.stateList || (exports.stateList = {}));\nvar State = /** @class */ (function () {\n    function State() {\n        this.state = stateList.INIT;\n        this.timer = new Timer_1.Timer(25);\n        this.updateView();\n    }\n    State.prototype.initState = function () {\n        this.state = stateList.INIT;\n        this.updateView();\n    };\n    State.prototype.updateState = function () {\n        if (this.state == stateList.BREAKED) {\n            this.state = stateList.WORKING;\n        }\n        else {\n            this.state += 1;\n        }\n        this.updateView();\n    };\n    State.prototype.updateView = function () {\n        this.timer.stopTimer();\n        if (this.state == stateList.INIT) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');\n        }\n        else if (this.state == stateList.WORKING) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');\n            this.timer.startWork();\n        }\n        else if (this.state == stateList.WORKED) {\n            var minuteFormElem = document.getElementById('breakMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start break');\n        }\n        else if (this.state == stateList.BREAKING) {\n            var minuteFormElem = document.getElementById('breakMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');\n            this.timer.startBreak();\n        }\n        else if (this.state == stateList.BREAKED) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');\n        }\n        else {\n            console.log('は?');\n        }\n        console.log(this.state);\n    };\n    return State;\n}());\nexports.State = State;\n\n\n//# sourceURL=webpack://pomoTimer/./dist/State.js?");
-
-/***/ }),
-
 /***/ "./dist/Timer.js":
 /*!***********************!*\
   !*** ./dist/Timer.js ***!
@@ -51,7 +34,24 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n// import UUID from \"uuid\";\nvar State_1 = __webpack_require__(/*! ./State */ \"./dist/State.js\");\nvar state = new State_1.State();\nvar startbutton = document.getElementById(\"startButton\");\nstartbutton.addEventListener('click', function () {\n    state.updateState();\n});\n// startbutton.addEventListener('load', () => {\n//     state.updateState();\n// });\n\n\n//# sourceURL=webpack://pomoTimer/./dist/index.js?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n// import UUID from \"uuid\";\nvar mainState_1 = __webpack_require__(/*! ./mainState */ \"./dist/mainState.js\");\nvar state = new mainState_1.mainState();\nvar startbutton = document.getElementById(\"startButton\");\nstartbutton.addEventListener('click', function () {\n    state.updateState();\n});\n// startbutton.addEventListener('load', () => {\n//     state.updateState();\n// });\n\n\n//# sourceURL=webpack://pomoTimer/./dist/index.js?");
+
+/***/ }),
+
+/***/ "./dist/mainState.js":
+/*!***************************!*\
+  !*** ./dist/mainState.js ***!
+  \***************************/
+/*! flagged exports */
+/*! export __esModule [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export mainState [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export stateList [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__ */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.mainState = exports.stateList = void 0;\nvar Timer_1 = __webpack_require__(/*! ./Timer */ \"./dist/Timer.js\");\nvar stateList;\n(function (stateList) {\n    stateList[stateList[\"INIT\"] = 0] = \"INIT\";\n    stateList[stateList[\"WORKING\"] = 1] = \"WORKING\";\n    stateList[stateList[\"WORKED\"] = 2] = \"WORKED\";\n    stateList[stateList[\"BREAKING\"] = 3] = \"BREAKING\";\n    stateList[stateList[\"BREAKED\"] = 4] = \"BREAKED\";\n})(stateList = exports.stateList || (exports.stateList = {}));\nvar mainState = /** @class */ (function () {\n    function mainState() {\n        this.state = stateList.INIT;\n        this.timer = new Timer_1.Timer(25);\n        this.updateView();\n    }\n    mainState.prototype.initState = function () {\n        this.state = stateList.INIT;\n        this.updateView();\n    };\n    mainState.prototype.updateState = function () {\n        if (this.state == stateList.BREAKED) {\n            this.state = stateList.WORKING;\n        }\n        else {\n            this.state += 1;\n        }\n        this.updateView();\n    };\n    mainState.prototype.updateView = function () {\n        this.timer.stopTimer();\n        if (this.state == stateList.INIT) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');\n        }\n        else if (this.state == stateList.WORKING) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');\n            this.timer.startWork();\n        }\n        else if (this.state == stateList.WORKED) {\n            var minuteFormElem = document.getElementById('breakMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start break');\n        }\n        else if (this.state == stateList.BREAKING) {\n            var minuteFormElem = document.getElementById('breakMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');\n            this.timer.startBreak();\n        }\n        else if (this.state == stateList.BREAKED) {\n            var minuteFormElem = document.getElementById('workMinute');\n            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');\n        }\n        else {\n            console.log('は?');\n        }\n        console.log(this.state);\n    };\n    return mainState;\n}());\nexports.mainState = mainState;\n\n\n//# sourceURL=webpack://pomoTimer/./dist/mainState.js?");
 
 /***/ }),
 
