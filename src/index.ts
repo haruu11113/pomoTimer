@@ -3,7 +3,7 @@ import { State } from "./State";
 
 const state: State = new State();
 
-var startbutton: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
+const startbutton: HTMLInputElement = <HTMLInputElement>document.getElementById("startButton");
 startbutton.addEventListener('click', () => {
     state.updateState();
 });
