@@ -3,10 +3,11 @@
     "version": "1.0.0",
     "description": "This is a pomodoro timer",
     "scripts": {
-        "electron": "electron ./dist/main.js",
-        "tsc": "tsc",
-        "webpack": "webpack",
+        "build": "tsc && webpack",
         "start": "tsc && webpack && electron ./dist/main.js",
+        "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
+        "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
+        "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
         "lint": "eslint -c .eslintrc --ext .ts ./src",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -17,41 +18,41 @@
     "author": "haruu11113",
     "license": "ISC",
     "build": {
-      "productName": "pomoTimer",
-      "extends": null,
-      "extraMetadata": {
-        "main": "dist/main.js"
-      },
-      "appId": "com.electron.pomoTimer",
-      "dmg": {
-        "contents": [
-          {
-            "x": 410,
-            "y": 150,
-            "type": "link",
-            "path": "/Applications"
-          },
-          {
-            "x": 130,
-            "y": 150,
-            "type": "file"
-          }
-        ]
-      },
-      "directories": {
-        "output": "release"
-      },
-      "files": [
-        "dist",
-        "node_modules/",
-        "package.json"
-      ],
-      "mac": {
-        "icon": "icons/icon_mac.png"
-      },
-      "win": {
-        "icon": "icons/icon_win.ico"
-      }
+        "productName": "pomoTimer",
+        "extends": null,
+        "extraMetadata": {
+            "main": "dist/main.js"
+        },
+        "appId": "com.electron.pomoTimer",
+        "dmg": {
+            "contents": [
+                {
+                    "x": 410,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                },
+                {
+                    "x": 130,
+                    "y": 150,
+                    "type": "file"
+                }
+            ]
+        },
+        "directories": {
+            "output": "release"
+        },
+        "files": [
+            "dist",
+            "node_modules/",
+            "package.json"
+        ],
+        "mac": {
+            "icon": "icons/icon_mac.png"
+        },
+        "win": {
+            "icon": "icons/icon_win.ico"
+        }
     },
     "bugs": {
         "url": "https://github.com/haruu11113/electron_timer/issues"
