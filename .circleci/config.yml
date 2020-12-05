@@ -2,9 +2,8 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/mern-starter
-            docker:
-                - image: circleci/node:4.8.2-jessie
-                - image: mongo:3.4.4-jessie
+        docker:
+            - image: circleci/node:4.8.2-jessie
         steps:
             - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
             - run:
