@@ -26,7 +26,7 @@ function createWindow() {
     var mainWindow = new electron_1.BrowserWindow({
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, "preload.js"),
+            preload: path.join(__dirname, "mainPreload.js"),
         },
         width: 800,
     });
