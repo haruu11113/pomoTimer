@@ -2,16 +2,15 @@ version: 2.1
 jobs:
     build:
         working_directory: ~/mern-starter
-            docker:
-                - image: circleci/node:4.8.2-jessie
-                - image: mongo:3.4.4-jessie
+        docker:
+            - image: circleci/node:12.18
         steps:
             - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
             - run:
                 name: npmの更新
-                command: 'npm install -g npm@latest'
+                command: 'sudo npm install -g npm@6.14.7'
             - restore_cache:
-                key: dependency-cache-{{ checksum "package-lock.json" }}
+                key: node-cache-{{ checksum "package-lock.json" }}
             - run:
                 name: npm のインストール
                 command: npm install
