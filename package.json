@@ -4,6 +4,7 @@
     "description": "This is a pomodoro timer",
     "scripts": {
         "build": "tsc && webpack",
+        "electron": "electron ./dist/main.js",
         "start": "tsc && webpack && electron ./dist/main.js",
         "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
         "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
