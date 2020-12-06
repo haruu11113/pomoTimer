@@ -26,7 +26,7 @@
         },
         "appId": "com.electron.pomoTimer",
         "directories": {
-            "output": "release"
+            "output": "build/Release"
         },
         "files": [
             "**/*",
