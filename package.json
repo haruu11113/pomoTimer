@@ -9,7 +9,8 @@
         "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
         "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
         "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
-        "lint": "eslint --ext .ts ./src/* --fix",
+        "lint:es": "eslint --ext .ts ./src/* --fix",
+        "lint:css": "stylelint **/*.css",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -64,6 +65,8 @@
         "eslint-config-prettier": "^7.0.0",
         "eslint-plugin-prettier": "^3.2.0",
         "prettier": "^2.2.1",
+        "stylelint": "^13.8.0",
+        "stylelint-config-standard": "^20.0.0",
         "ts-loader": "^8.0.11",
         "typescript": "^4.1.2",
         "webpack": "^5.8.0",
