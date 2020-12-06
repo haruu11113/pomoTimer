@@ -13,7 +13,7 @@ export class Timer {
         this.second = 0;
         this.timerInterval = null;
         this.isPush = false;
-        this.makePushPermission();
+        this.makeNotice("Let's do our best.", "");
     }
 
     updateFinishAt(minute: number): void{
@@ -23,70 +23,52 @@ export class Timer {
         this.second = 0;
     }
 
-    startWork(): void {
+   startWork(): void {
+        const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
+        const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
+        this.startTimer(timerMinuteElem, timerSecondElem, 'You need break time', 'Break time is finished');
+    }
+
+    startBreak(): void {
+        const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
+        const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
+        this.startTimer(timerMinuteElem, timerSecondElem, 'Do work now!', 'Break time is finished');
+    }
+
+    stopTimer(): void {
+        if (this.timerInterval) {
+            const pieElem: HTMLInputElement = <HTMLInputElement>document.getElementById('pie');
+            pieElem.classList.remove("pie");
+            clearInterval(this.timerInterval);
+        }
+    }
+    
+    startTimer(tMinElem: HTMLInputElement, tSecElem: HTMLInputElement, title: string, body: string): void {
         const pieElem: HTMLInputElement = <HTMLInputElement>document.getElementById('pie');
         pieElem.className = "pie";
  
         this.timerInterval = setInterval(() => {
-            const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
-            const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
-
             if (this.minute == 0 && this.second==0 ){
                 this.stopTimer();
-                // alert('Break!!!')
-                    Push.create("Hello world!", {
-                        body: "How's it hangin'?",
-                        // icon: 'icon.png',
-                        timeout: 4000,
-                        // onClick: function () {
-                        //     window.focus();
-                        //     // this.close();
-                        // }
-                    });
+                this.makeNotice(title, body);
             } else if (this.second == 0){
                 this.minute -= 1;
                 this.second = 59;
             }else {
                 this.second -= 1;
             }
-
-            timerMinuteElem.innerText = String(this.minute);
-            timerSecondElem.innerText = ' : ' + String(this.second);
+            tMinElem.innerText = String(this.minute);
+            tSecElem.innerText = ' : ' + String(this.second);
         },1000);
     }
 
-    startBreak(): void {
-        this.timerInterval = setInterval(() => {
-            const timerMinuteElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerMinute');
-            const timerSecondElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timerSecond');
-
-            if (this.minute == 0 && this.second==0 ){
-                this.stopTimer();
-                alert('Break!!!')
-            } else if (this.second == 0){
-               this.minute -= 1;
-                this.second = 59;
-            }else {
-                this.second -= 1;
-            }
-
-            timerMinuteElem.innerText = String(this.minute);
-            timerSecondElem.innerText = ' : ' + String(this.second);
-        },1000);
-
-    }
-
-    stopTimer(): void{
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-        }
-    }
-
-    setTimer(minute: number, stateName: string): void {
+    setButton(stateName: string): void {
         console.log('settimer');
         const startButtonElem: HTMLElement = <HTMLElement>document.getElementById('startButton');
         startButtonElem.innerText = stateName;
+    }
 
+    setTimer(minute: number): void {
         this.updateFinishAt(minute);
 
         const  timerElem: HTMLInputElement = <HTMLInputElement>document.getElementById('timer');
@@ -98,16 +80,10 @@ export class Timer {
         timerSecondElem.innerText = ' : ' + String(this.second);
     }
 
-    makePushPermission(): void {
-        Push.create("Hello world!", {
-            body: "How's it hangin'?",
-            // icon: 'icon.png',
-            timeout: 4000,
-            // onClick: function () {
-            //     window.focus();
-            //     // this.close();
-            // }
+    makeNotice(t: string, b: string, timeout= 4000): void {
+        Push.create(t, {
+            body: b,
+            timeout: timeout
         });
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     }
 }
