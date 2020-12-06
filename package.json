@@ -9,7 +9,7 @@
         "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
         "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
         "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
-        "lint": "eslint -c .eslintrc --ext .ts ./src",
+        "lint": "eslint --ext .ts ./src/* --fix",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -56,17 +56,20 @@
     },
     "homepage": "https://github.com/haruu11113/electron_timer#readme",
     "devDependencies": {
-        "electron-builder": "^22.9.1",
+        "@typescript-eslint/eslint-plugin": "^4.9.0",
+        "@typescript-eslint/parser": "^4.9.0",
         "electron": "^11.0.3",
+        "electron-builder": "^22.9.1",
+        "eslint": "^7.15.0",
+        "eslint-config-prettier": "^7.0.0",
+        "eslint-plugin-prettier": "^3.2.0",
+        "prettier": "^2.2.1",
         "ts-loader": "^8.0.11",
         "typescript": "^4.1.2",
         "webpack": "^5.8.0",
         "webpack-cli": "^4.2.0"
     },
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "^4.8.2",
-        "@typescript-eslint/parser": "^4.8.2",
-        "eslint": "^7.14.0",
         "express": "^4.17.1",
         "push.js": "^1.0.12"
     }
