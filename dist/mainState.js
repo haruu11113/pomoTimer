@@ -29,29 +29,57 @@ var mainState = /** @class */ (function () {
         }
         this.updateView();
     };
+    mainState.prototype.changeWorkMinute = function () {
+        if (this.state == stateList.INIT ||
+            this.state == stateList.BREAKED) {
+            var workMinuteFormElem = document.getElementById('workMinute');
+            this.resetTimer(workMinuteFormElem);
+        }
+        else {
+            console.log('can not');
+        }
+    };
+    mainState.prototype.changeBreakMinute = function () {
+        if (this.state == stateList.WORKED) {
+            var breakMinuteFormElem = document.getElementById('breakMinute');
+            this.resetTimer(breakMinuteFormElem);
+        }
+        else {
+            console.log('can not');
+        }
+    };
+    mainState.prototype.resetTimer = function (minuteFormElem) {
+        this.timer.setTimer(parseInt(minuteFormElem.value));
+        this.timer.setButton('start work');
+    };
     mainState.prototype.updateView = function () {
         this.timer.stopTimer();
         if (this.state == stateList.INIT) {
             var minuteFormElem = document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
+            this.timer.setTimer(parseInt(minuteFormElem.value));
+            this.timer.setButton('start work');
         }
         else if (this.state == stateList.WORKING) {
             var minuteFormElem = document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
+            this.timer.setTimer(parseInt(minuteFormElem.value));
+            this.timer.setButton('stop');
             this.timer.startWork();
         }
         else if (this.state == stateList.WORKED) {
             var minuteFormElem = document.getElementById('breakMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start break');
+            this.timer.setTimer(parseInt(minuteFormElem.value));
+            this.timer.setButton('start break');
         }
         else if (this.state == stateList.BREAKING) {
             var minuteFormElem = document.getElementById('breakMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
+            this.timer.setTimer(parseInt(minuteFormElem.value));
+            this.timer.setButton('stop');
             this.timer.startBreak();
         }
         else if (this.state == stateList.BREAKED) {
             var minuteFormElem = document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
+            this.timer.setTimer(parseInt(minuteFormElem.value));
+            this.timer.setButton('start work');
         }
         else {
             console.log('は?');

@@ -13,7 +13,7 @@ var Timer = /** @class */ (function () {
         this.second = 0;
         this.timerInterval = null;
         this.isPush = false;
-        this.makePushPermission();
+        this.makeNotice("Let's do our best.", "");
     }
     Timer.prototype.updateFinishAt = function (minute) {
         var now = new Date();
@@ -22,20 +22,30 @@ var Timer = /** @class */ (function () {
         this.second = 0;
     };
     Timer.prototype.startWork = function () {
+        var timerMinuteElem = document.getElementById('timerMinute');
+        var timerSecondElem = document.getElementById('timerSecond');
+        this.startTimer(timerMinuteElem, timerSecondElem, 'You need break time', 'Break time is finished');
+    };
+    Timer.prototype.startBreak = function () {
+        var timerMinuteElem = document.getElementById('timerMinute');
+        var timerSecondElem = document.getElementById('timerSecond');
+        this.startTimer(timerMinuteElem, timerSecondElem, 'Do work now!', 'Break time is finished');
+    };
+    Timer.prototype.stopTimer = function () {
+        if (this.timerInterval) {
+            var pieElem = document.getElementById('pie');
+            pieElem.classList.remove("pie");
+            clearInterval(this.timerInterval);
+        }
+    };
+    Timer.prototype.startTimer = function (tMinElem, tSecElem, title, body) {
         var _this = this;
         var pieElem = document.getElementById('pie');
         pieElem.className = "pie";
         this.timerInterval = setInterval(function () {
-            var timerMinuteElem = document.getElementById('timerMinute');
-            var timerSecondElem = document.getElementById('timerSecond');
             if (_this.minute == 0 && _this.second == 0) {
                 _this.stopTimer();
-                // alert('Break!!!')
-                push_js_1.default.create("Hello world!", {
-                    body: "How's it hangin'?",
-                    // icon: 'icon.png',
-                    timeout: 4000,
-                });
+                _this.makeNotice(title, body);
             }
             else if (_this.second == 0) {
                 _this.minute -= 1;
@@ -44,39 +54,16 @@ var Timer = /** @class */ (function () {
             else {
                 _this.second -= 1;
             }
-            timerMinuteElem.innerText = String(_this.minute);
-            timerSecondElem.innerText = ' : ' + String(_this.second);
+            tMinElem.innerText = String(_this.minute);
+            tSecElem.innerText = ' : ' + String(_this.second);
         }, 1000);
     };
-    Timer.prototype.startBreak = function () {
-        var _this = this;
-        this.timerInterval = setInterval(function () {
-            var timerMinuteElem = document.getElementById('timerMinute');
-            var timerSecondElem = document.getElementById('timerSecond');
-            if (_this.minute == 0 && _this.second == 0) {
-                _this.stopTimer();
-                alert('Break!!!');
-            }
-            else if (_this.second == 0) {
-                _this.minute -= 1;
-                _this.second = 59;
-            }
-            else {
-                _this.second -= 1;
-            }
-            timerMinuteElem.innerText = String(_this.minute);
-            timerSecondElem.innerText = ' : ' + String(_this.second);
-        }, 1000);
-    };
-    Timer.prototype.stopTimer = function () {
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-        }
-    };
-    Timer.prototype.setTimer = function (minute, stateName) {
+    Timer.prototype.setButton = function (stateName) {
         console.log('settimer');
         var startButtonElem = document.getElementById('startButton');
         startButtonElem.innerText = stateName;
+    };
+    Timer.prototype.setTimer = function (minute) {
         this.updateFinishAt(minute);
         var timerElem = document.getElementById('timer');
         timerElem.innerText = String(this.finishAt.getHours()) + ' : ' + String(this.finishAt.getMinutes()) + ' : ' + String(this.finishAt.getSeconds());
@@ -85,13 +72,12 @@ var Timer = /** @class */ (function () {
         timerMinuteElem.innerText = String(this.minute);
         timerSecondElem.innerText = ' : ' + String(this.second);
     };
-    Timer.prototype.makePushPermission = function () {
-        push_js_1.default.create("Hello world!", {
-            body: "How's it hangin'?",
-            // icon: 'icon.png',
-            timeout: 4000,
+    Timer.prototype.makeNotice = function (t, b, timeout) {
+        if (timeout === void 0) { timeout = 4000; }
+        push_js_1.default.create(t, {
+            body: b,
+            timeout: timeout
         });
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     };
     return Timer;
 }());
