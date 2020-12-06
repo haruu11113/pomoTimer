@@ -8,6 +8,3 @@ startbutton.addEventListener('click', () => {
     state.updateState();
 });
 
-// startbutton.addEventListener('load', () => {
-//     state.updateState();
-// });
