@@ -22,14 +22,16 @@
         "productName": "pomoTimer",
         "extends": null,
         "extraMetadata": {
-            "main": "dist/main.js"
+            "main": "dist/index.js"
         },
         "appId": "com.electron.pomoTimer",
         "directories": {
-            "output": "release"
+            "output": "build/Release"
         },
         "files": [
-            "**/*",
+            "views/*",
+            "styles/*",
+            "dist/*",
             "build/icons/*.png",
             "icons/*"
         ],
