@@ -35,7 +35,9 @@ export class mainState {
   }
 
   changeWorkMinute(): void {
-    let workMinuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById("workMinute");
+    const workMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("workMinute")
+    );
     if (this.state == stateList.INIT || this.state == stateList.BREAKED) {
       this.resetTimer(workMinuteFormElem);
     } else {
@@ -44,7 +46,9 @@ export class mainState {
   }
 
   changeBreakMinute(): void {
-    let breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById("breakMinute");
+    const breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("breakMinute")
+    );
     if (this.state == stateList.WORKED) {
       this.resetTimer(breakMinuteFormElem);
     } else {
@@ -58,8 +62,12 @@ export class mainState {
   }
 
   private updateView(): void {
-    let workMinuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById("workMinute");
-    let breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById("breakMinute");
+    const workMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("workMinute")
+    );
+    const breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("breakMinute")
+    );
     this.timer.stopTimer();
     switch (this.state) {
       case stateList.INIT:
