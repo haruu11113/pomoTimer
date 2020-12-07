@@ -9,6 +9,7 @@
         "build:mac": "tsc && webpack &&  node_modules/.bin/electron-builder --mac --x64",
         "build:win": "tsc && webpack &&  node_modules/.bin/electron-builder --win --x64",
         "build:linux": "tsc && webpack &&  node_modules/.bin/electron-builder --linux --x64",
+        "lint": "npm run lint:es && npm run lint:css",
         "lint:es": "eslint --ext .ts ./src/* --fix",
         "lint:css": "stylelint **/*.css --fix",
         "test": "echo \"Error: no test specified\" && exit 1"
