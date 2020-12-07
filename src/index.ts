@@ -1,4 +1,3 @@
-// import UUID from "uuid";
 import { mainState } from "./mainState";
 
 const state: mainState = new mainState();
