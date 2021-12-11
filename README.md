@@ -1,5 +1,5 @@
 # pomoTimer
-
+pomoTimer on [web](https://haruu11113.github.io/pomoTimer/index.html)
 ## Installing
 
 ## Dependency
