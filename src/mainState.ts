@@ -1,63 +1,100 @@
 import { Timer } from "./Timer";
 
 export enum stateList {
-    INIT,
-    WORKING,
-    WORKED,
-    BREAKING,
-    BREAKED
+  INIT,
+  WORKING,
+  WORKED,
+  BREAKING,
+  BREAKED,
 }
 
 export class mainState {
-    public state: number;
-    public timer: Timer;
-    constructor () {
-        this.state = stateList.INIT;
-        this.timer = new Timer(25);
-        this.updateView();
+  public state: stateList;
+  public timer: Timer;
+  // private workMinuteFormElem: HTMLInputElement;
+  // private breakMinuteFormElem: HTMLInputElement;
+
+  constructor() {
+    this.state = stateList.INIT;
+    this.timer = new Timer(25);
+    this.updateView();
+  }
+
+  initState(): void {
+    this.state = stateList.INIT;
+    this.updateView();
+  }
+
+  updateState(): void {
+    if (this.state == stateList.BREAKED) {
+      this.state = stateList.WORKING;
+    } else {
+      this.state += 1;
     }
-    
-    initState(): void {
-        this.state = stateList.INIT;
-        this.updateView();
+    this.updateView();
+  }
+
+  changeWorkMinute(): void {
+    const workMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("workMinute")
+    );
+    if (this.state == stateList.INIT || this.state == stateList.BREAKED) {
+      this.resetTimer(workMinuteFormElem);
+    } else {
+      console.log("can not");
     }
-    
-    updateState(): void {
-        if (this.state == stateList.BREAKED) {
-            this.state = stateList.WORKING;
-        } else {
-            this.state += 1
-        }
-        this.updateView();
+  }
+
+  changeBreakMinute(): void {
+    const breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("breakMinute")
+    );
+    if (this.state == stateList.WORKED) {
+      this.resetTimer(breakMinuteFormElem);
+    } else {
+      console.log("can not");
     }
+  }
 
-    private updateView(): void {
-        this.timer.stopTimer();
-        if (this.state == stateList.INIT){
-            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
-        } else if (this.state == stateList.WORKING) {
-            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
-            this.timer.startWork();
+  resetTimer(minuteFormElem: HTMLInputElement): void {
+    this.timer.setTimer(parseInt(minuteFormElem.value));
+    this.timer.setButton("start work");
+  }
 
-        } else if (this.state == stateList.WORKED) { 
-            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start break');
-
-        } else if (this.state == stateList.BREAKING) {
-            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('breakMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'stop');
-            this.timer.startBreak();
-
-        } else if (this.state == stateList.BREAKED) {
-            const minuteFormElem: HTMLInputElement = <HTMLInputElement>document.getElementById('workMinute');
-            this.timer.setTimer(parseInt(minuteFormElem.value), 'start work');
-
-        } else {
-            console.log('は?');
-        } 
-
-        console.log(this.state);
+  private updateView(): void {
+    const workMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("workMinute")
+    );
+    const breakMinuteFormElem: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById("breakMinute")
+    );
+    this.timer.stopTimer();
+    switch (this.state) {
+      case stateList.INIT:
+        this.timer.setTimer(parseInt(workMinuteFormElem.value));
+        this.timer.setButton("start work");
+        break;
+      case stateList.WORKING:
+        this.timer.setTimer(parseInt(workMinuteFormElem.value));
+        this.timer.setButton("stop");
+        this.timer.startWork();
+        break;
+      case stateList.WORKED:
+        this.timer.setTimer(parseInt(breakMinuteFormElem.value));
+        this.timer.setButton("start break");
+        break;
+      case stateList.BREAKING:
+        this.timer.setTimer(parseInt(breakMinuteFormElem.value));
+        this.timer.setButton("stop");
+        this.timer.startBreak();
+        break;
+      case stateList.BREAKED:
+        this.timer.setTimer(parseInt(workMinuteFormElem.value));
+        this.timer.setButton("start work");
+        break;
+      default:
+        console.log("は?");
     }
+    console.log(this.state);
+  }
 }
